@@ -16,11 +16,11 @@ cookies = {'UM_distinctid':'16a85ae9e011e5-0c0cbef4f76835-39395704-15f900-16a85a
 r = requests.get(url=url,headers=headers,params=params,cookies=cookies)
 
 print(r.status_code)
-#print(type(r.content))
 #temp = r.content.decode('utf-8')
 #print(json.loads(temp)['code'])
+text = json.loads(r.content)
+print(type(text))
+print(text['msg'])
 
-print(json.loads(r.content))
 
-#print(json.loads(r.content))
 
