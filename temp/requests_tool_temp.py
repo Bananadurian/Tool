@@ -17,10 +17,16 @@ r = requests.get(url=url,headers=headers,params=params,cookies=cookies)
 
 print(r.status_code)
 #temp = r.content.decode('utf-8')
-#print(json.loads(temp)['code'])
 text = json.loads(r.content)
-print(type(text))
-print(text['msg'])
+#print(type(text))
 
+for i in range(len(text['data']['list'])):
+    print(text['data']['list'][i]['user']['isHunter'])
+    assert text['data']['list'][i]['user']['isHunter'] == 0,'false'
 
+'''
+f = open('result.txt','w')
+json.dump(text,f,sort_keys=True,indent=4,ensure_ascii=False)
+f.close()
+'''
 
