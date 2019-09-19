@@ -18,7 +18,6 @@ params = 'gameId=&appLoginBid=10000248288&packageChannel=offical&os=1&appName=li
 queueMark = '&queueMark=0'
 f = open('result1.txt','w',encoding='utf-8')
 
-
 for page_num in range(1,5):
     page = '&page={}'.format(page_num)
     params = params+page+queueMark
@@ -32,7 +31,6 @@ for page_num in range(1,5):
         #print(result['data']['blogList'][i]['user']['nickname'])
         text = str(result['data']['blogList'][i]['user']['bid']) +':'+ result['data']['blogList'][i]['user']['nickname']
         #print(text)
-
         f.write(text+'\n')
         
     queueMark = '&queueMark={}'.format(result['data']['queueMark'])
