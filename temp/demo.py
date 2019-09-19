@@ -31,7 +31,7 @@ for page_num in range(1,5):
     for i in range(len(result['data']['blogList'])):
         #print(result['data']['blogList'][i]['user']['nickname'])
         text = str(result['data']['blogList'][i]['user']['bid']) +':'+ result['data']['blogList'][i]['user']['nickname']
-        print(text)
+        #print(text)
 
         f.write(text+'\n')
         
