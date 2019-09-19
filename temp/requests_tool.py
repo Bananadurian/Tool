@@ -15,25 +15,28 @@ class RequestsUrl:
                 
         self.url_temp = 'http://api.lieyou.com/api/blog/hotspot_category_recommendation_list?gameId=&appLoginBid=10000248288&packageChannel=offical&os=1&appName=lieyou&appver=3.0.0&socialityTags=0&categoryId=38&versionCode=75&page={}'
         self.queueMark = '&queueMark=0'
-    def get_url_list(self):
-        return [self.url_temp.format(i) for i in range(1,2)]
+    def get_url_list(self,page_num):
+        return [self.url_temp.format(i) for i in range(1,page_num+1)]
     
     def parse_url(self,url):
         r = requests.get(url,headers = self.headers,cookies = self.cookies)
+        print(r.status_code)
         return json.loads(r.content)
 
-    def save_response(self):
-        pass
+    def save_file(self,content):
+        with open('res.txt','a',encoding='utf-8') as f:
+            f.write(content+'\n')
 
-    def run(self):
+    def run(self,times):
         #构造url
-        for i in range(1,5):
-            url = self.url_temp.format(i)+self.queueMark
-            print(url)            
-            result = self.parse_url(url)
-            self.queueMark = '&queueMark={}'.format(result['data']['queueMark'])
-            print(self.queueMark)
+        for url_list_temp in self.get_url_list(times):
+            url = url_list_temp + self.queueMark
+            res = self.parse_url(url)
+            self.queueMark = '&queueMark={}'.format(res['data']['queueMark'])
+            for i in range(len(res['data']['blogList'])):
+                temp = res['data']['blogList'][i]['user']['nickname']
+                self.save_file(temp)
 
 if __name__=='__main__':
     result = RequestsUrl()
-    result.run()
+    result.run(3)
