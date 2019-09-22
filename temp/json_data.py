@@ -13,4 +13,9 @@ print('data to json:',json.dumps(data))
 json1 = json.dumps(data)
 print('json to data:',json.loads(json1))
 
+'''
+f = open('result.txt','w')
+json.dump(text,f,sort_keys=True,indent=4,ensure_ascii=False)
+f.close()
+'''
 
