@@ -50,16 +50,19 @@ class SessionGetUrl:
     def login(self):
         session = requests.session()
         r = session.get(url = 'http://api.lieyou.com/base/api/test_login?bid={}'.format(self.login_bid),headers = self.headers)
+        if r.status_code != 200:
+            raise Exception('network error:{}'.format(r.status_code))
         print(json.loads(r.content)['msg'])
         return session
-
     def run(self):
         session = self.login()
         res = session.get('http://api-cloud.lieyou.com/api/home/my_home?appLoginBid=10000248288&packageChannel=offical&os=1&appName=lieyou&appver=3.0.0&bid=10000247871&versionCode=75',headers= self.headers)
         print(json.loads(res.content)['msg'])        
-        
 if __name__=='__main__':
     #result = RequestsGetUrl()
     #result.run(3)
-    result = SessionGetUrl('10000248288')
-    result.run()
+    try:
+        result = SessionGetUrl('10000248288')
+        result.run()
+    except Exception as error:
+        print(error)
