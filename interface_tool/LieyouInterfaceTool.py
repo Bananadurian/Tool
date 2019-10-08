@@ -41,22 +41,30 @@ class InterfaceTool:
     
 if __name__=='__main__':
     try:
-        print(' 1.解除绑定手机\n 2.修改账号为测试号\n 3.清除账号设备绑定\n 4.设置密码(asd123)\n 5.退出')
-        temp = input('choose+bid：\n')
-        bid = temp.split('+')[1]
-        choose = int(temp.split('+')[0])
-        print('choose:{},bid:{}'.format(choose,bid))
-        tool = InterfaceTool(bid)
-        if choose == 1:
-            tool.unbind_mobile()
-        elif choose == 2:
-            tool.modify_account_type()
-        elif choose == 3:
-            tool.relieve_bind_device()        
-        elif choose == 4:
-            tool.set_password()
-        else:
-            pass
+        print(' 1.解除绑定手机\n 2.修改账号为测试号\n 3.清除账号设备绑定\n 4.设置密码(asd123)\n 输入数字5回车即可退出')
+        while True:
+            temp = input('choose+bid：\n').split('+')
+            if len(temp)==2 and temp[1].isdigit() and len(temp[1])==11:
+                choose = int(temp[0])
+                bid = temp[1]
+                print('choose:{},bid:{}'.format(choose,bid))
+                tool = InterfaceTool(bid)
+                if choose == 1:
+                    tool.unbind_mobile()
+                elif choose == 2:
+                    tool.modify_account_type()
+                elif choose == 3:
+                    tool.relieve_bind_device()        
+                elif choose == 4:
+                    tool.set_password()
+                else:
+                    print('选项不存在')
+                break
+            elif temp[0] == '5':
+                print('退出成功')
+                break
+            else:
+                print('输入格式错误，请重新输入！\n')
         input('Enter Pass')
     except Exception as error:
         print(error)
