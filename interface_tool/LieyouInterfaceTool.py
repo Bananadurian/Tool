@@ -39,24 +39,24 @@ class InterfaceTool:
         result = self.get_url('http://api.lieyou.com/admin/account_manage/do_relieve_mobile_data?bid={}&relieveReason=test'.format(self.bid))
         print(result['msg'])
     
-
 if __name__=='__main__':
     try:
-        print(' 1.解除绑定手机\n 2.修改账号为测试号\n 3.清除账号设备绑定\n 4.设置密码(asd123)\n')
-        temp = input('bid+choose：\n')
+        print(' 1.解除绑定手机\n 2.修改账号为测试号\n 3.清除账号设备绑定\n 4.设置密码(asd123)\n 5.退出')
+        temp = input('choose+bid：\n')
         bid = temp.split('+')[1]
         choose = int(temp.split('+')[0])
-        print('bid:{},choose:{}'.format(bid,choose))
+        print('choose:{},bid:{}'.format(choose,bid))
         tool = InterfaceTool(bid)
         if choose == 1:
             tool.unbind_mobile()
         elif choose == 2:
             tool.modify_account_type()
         elif choose == 3:
-            tool.relieve_bind_device()
-        else:
+            tool.relieve_bind_device()        
+        elif choose == 4:
             tool.set_password()
-
+        else:
+            pass
         input('Enter Pass')
     except Exception as error:
         print(error)
