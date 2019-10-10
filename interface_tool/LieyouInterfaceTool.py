@@ -41,9 +41,9 @@ class InterfaceTool:
     
 if __name__=='__main__':
     try:
-        print(' 1.解除绑定手机\n 2.修改账号为测试号\n 3.清除账号设备绑定\n 4.设置密码(asd123)\n 输入数字5回车即可退出')
+        print(' 1.解除绑定手机\n 2.修改账号为测试号\n 3.清除账号设备绑定\n 4.设置密码(asd123)\n 输入数字5回车即可退出\n')
         while True:
-            temp = input('choose+bid：\n').split('+')
+            temp = input('choose+bid (如：1+10000248288)：\n').split('+')
             if len(temp)==2 and temp[1].isdigit() and len(temp[1])==11:
                 choose = int(temp[0])
                 bid = temp[1]
