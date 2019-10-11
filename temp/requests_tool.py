@@ -18,12 +18,14 @@ class RequestsGetUrl:
         self.url_temp = 'http://api.lieyou.com/api/blog/hotspot_category_recommendation_list?lng=113.371506&os=1&appName=lieyou&appver=3.0.0&socialityTags=0&versionCode=78&appLoginBid=10000248288&packageChannel=offical&page={}&lat=23.123453&categoryId=23'
 
         self.queueMark = '&queueMark=0'
+    
     def get_url_list(self,page_num):
         return [self.url_temp.format(i) for i in range(1,page_num+1)]
     
     def parse_url(self,url):
         r = requests.get(url,headers = self.headers,cookies = self.cookies)
-        print(r.status_code)
+        if r.status_code != 200:
+            raise Exception('network error:{}'.format(r.status_code))
         return json.loads(r.content)
 
     def save_file(self,content):
@@ -64,18 +66,20 @@ class SessionGetUrl:
             raise Exception('network error:{}'.format(r.status_code))
         print(json.loads(r.content)['msg'])
         return session
+    
     def run(self):
         session = self.login()
         res = session.get('http://api-cloud.lieyou.com/api/home/my_home?appLoginBid=10000248288&packageChannel=offical&os=1&appName=lieyou&appver=3.0.0&bid=10000247871&versionCode=75',headers= self.headers)
         print(json.loads(res.content)['msg'])        
 
 if __name__=='__main__':
-    result = RequestsGetUrl()
-    result.run(20)
-    """
     try:
-        result = SessionGetUrl('10000248288')
-        result.run()
+        result = RequestsGetUrl()
+        result.run(20)
+        
+        #result = SessionGetUrl('10000248288')
+        #result.run()
+    
     except Exception as error:
         print(error)
-    """
+
