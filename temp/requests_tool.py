@@ -43,8 +43,7 @@ class RequestsGetUrl:
                 ishunter = res['data']['blogList'][i]['user']['isHunter']
                 bid = res['data']['blogList'][i]['user']['bid']
                 did = res['data']['blogList'][i]['blog']['did']
-                if ishunter == 1:
-                    print('存在猎人')
+                assert ishunter == 0,'存在猎人'
                 temp ='第{}个   '.format(i) + 'ishunter:{}   '.format(str(ishunter))+nickname + str(bid)+'   '+str(did)
                 self.save_file(temp)
 
@@ -80,6 +79,6 @@ if __name__=='__main__':
         #result = SessionGetUrl('10000248288')
         #result.run()
     
-    except Exception as error:
+    except (Exception,AssertionError) as e:
         print(error)
 
