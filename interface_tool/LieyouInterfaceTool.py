@@ -42,23 +42,21 @@ class InterfaceTool:
     
 if __name__=='__main__':
     print('='*35)
-    print('{:10}  {}'.format('choose','content'))
+    print('{:10} {}'.format('Choose','Content'))
     print('-'*35)
-    print('  {:8}  {}'.format('1','解除手机绑定'))
-    print('  {:8}  {}'.format('2','修改账号为测试号'))
-    print('  {:8}  {}'.format('3','清除账号绑定设备'))
-    print('  {:8}  {}'.format('4','设置密码(默认asd123,可选)'))
-    print('  {:8}{}'.format('其它','输入数字5回车退出'))
+    print(' {:<8}  {}'.format('1','解除手机绑定'))
+    print(' {:<8}  {}'.format('2','修改账号为测试号'))
+    print(' {:<8}  {}'.format('3','清除账号绑定设备'))
+    print(' {:<8}  {}'.format('4','设置密码(默认asd123,可选)'))
+    print(' {:<8}{}'.format('其它','输入数字5回车退出'))
     print('-'*35)
 
     try:
         while True:
             temp = input('choose+bid （+password可选)：\n').split('+')
             if len(temp)==2 and temp[1].isdigit() and len(temp[1])==11:
-                choose = int(temp[0])
-                bid = temp[1]
-                print('choose:{},bid:{}'.format(choose,bid))
-                tool = InterfaceTool(bid)
+                print('choose:{},bid:{}'.format(int(temp[0]),temp[1]))
+                tool = InterfaceTool(temp[1])
                 if choose == 1:
                     tool.unbind_mobile()
                 elif choose == 2:
