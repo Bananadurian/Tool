@@ -37,6 +37,7 @@ class RequestsGetUrl:
                 temp = res['data']['blogList'][i]['user']['nickname']
                 self.save_file(temp)
 
+
 class SessionGetUrl:
     def __init__(self,login_bid):
         self.headers = {'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) Ap    pleWebKit/60    3.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'}
@@ -58,6 +59,7 @@ class SessionGetUrl:
         session = self.login()
         res = session.get('http://api-cloud.lieyou.com/api/home/my_home?appLoginBid=10000248288&packageChannel=offical&os=1&appName=lieyou&appver=3.0.0&bid=10000247871&versionCode=75',headers= self.headers)
         print(json.loads(res.content)['msg'])        
+
 if __name__=='__main__':
     #result = RequestsGetUrl()
     #result.run(3)
