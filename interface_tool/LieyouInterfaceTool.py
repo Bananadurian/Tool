@@ -79,6 +79,6 @@ if __name__=='__main__':
             else:
                 print('输入格式错误，请重新输入！\n')
         input('Enter Pass')
-    except Exception as error:
-        print(error)
+    except Exception as e:
+        print(e)
     
