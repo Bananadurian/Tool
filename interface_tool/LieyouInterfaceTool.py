@@ -55,8 +55,10 @@ if __name__=='__main__':
         while True:
             temp = input('choose+bid （+password可选)：\n').split('+')
             if len(temp)==2 and temp[1].isdigit() and len(temp[1])==11:
-                print('choose:{},bid:{}'.format(int(temp[0]),temp[1]))
-                tool = InterfaceTool(temp[1])
+                choose = int(temp[0])
+                bid = temp[1]
+                print('choose:{},bid:{}'.format(choose,bid))
+                tool = InterfaceTool(bid)
                 if choose == 1:
                     tool.unbind_mobile()
                 elif choose == 2:
