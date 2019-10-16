@@ -21,22 +21,22 @@ class InterfaceTool:
             result = self.get_url('http://passport.lieyou.com/lieyou/sdk/create_password?cache=no&bid={}&isNew=1&password={}'.format(self.bid,self.password))
             if result['code'] == 0:
                 flag = False
-        print(result['msg'])
+        print(result['msg']+'\n')
         
     def relieve_bind_device(self):
         '''清除绑定设备'''
         result = self.get_url('http://passport.lieyou.com/goplay/api/relieve_bind_device?name=ccy123&bid={}&cache=no&clearMobile=1&type=byLoginBid'.format(self.bid))
-        print(result['msg'])
+        print(result['msg']+'\n')
         
     def modify_account_type(self):
         '''修改账号类型为测试号'''
         result = self.get_url('http://api.lieyou.com/admin/account_manage/do_account_type_data?bid={}&accountType=1'.format(self.bid))
-        print(result['msg'])
+        print(result['msg']+'\n')
         
     def unbind_mobile(self):
         '''解除绑定手机'''
         result = self.get_url('http://api.lieyou.com/admin/account_manage/do_relieve_mobile_data?bid={}&relieveReason=test'.format(self.bid))
-        print(result['msg'])
+        print(result['msg']+'\n')
     
 
 if __name__=='__main__':
@@ -46,7 +46,7 @@ if __name__=='__main__':
     print(' {:<8}  {}'.format('1','解除手机绑定'))
     print(' {:<8}  {}'.format('2','修改账号为测试号'))
     print(' {:<8}  {}'.format('3','清除账号绑定设备'))
-    print(' {:<8}  {}'.format('4','设置密码(默认asd123,可选)'))
+    print(' {:<8}  {}'.format('4','设置密码(默认asd123,可选,6-8位)'))
     print(' {:<8}{}'.format('其它','回车直接退出'))
     print('-'*35)
 
@@ -67,12 +67,15 @@ if __name__=='__main__':
                 elif choose == 4:
                     tool.set_password()
                 else:
-                    print('选项不存在')
+                    print('选项不存在\n')
                 #break
             
             elif len(temp)==3 and temp[1].isdigit() and len(temp[1])==11:
-                tool = InterfaceTool(temp[1],temp[2])
-                tool.set_password()   
+                if 6 <= len(temp[2]) <= 8:
+                    tool = InterfaceTool(temp[1],temp[2])
+                    tool.set_password()   
+                else:
+                    print('密码长度不对，请重新输入!\n')
                 #break
             elif temp[0] == '':
                 print('退出成功')
