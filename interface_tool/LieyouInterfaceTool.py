@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 import requests
 import json
+import os
 
 class InterfaceTool:
     def __init__(self,bid,password='asd123'):
@@ -82,7 +83,7 @@ if __name__=='__main__':
                 break
             else:
                 print('输入格式错误，请重新输入！\n')
-        input('Enter Pass')
+        os.system('pause')
     except Exception as e:
         print(e)
     
