@@ -83,7 +83,7 @@ if __name__=='__main__':
                 break
             else:
                 print('输入格式错误，请重新输入！\n')
-        os.system('pause')
+        os.system('exit')
     except Exception as e:
         print(e)
     
