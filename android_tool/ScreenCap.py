@@ -1,5 +1,5 @@
-import os
-import sys
+#import os
+#import sys
 import android_adb_tool as adb
 '''
 截图文件名可以通过运行py的时候带参数修改，默认为sceen

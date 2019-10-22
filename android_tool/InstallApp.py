@@ -1,5 +1,5 @@
 import android_adb_tool as adb
-import os
+#import os
 
 adb.get_device_state()     
 adb.install_apk()
