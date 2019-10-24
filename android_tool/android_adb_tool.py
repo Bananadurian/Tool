@@ -50,9 +50,9 @@ def get_appname_or_activity(key):
         return temp[0][key]
 
 def install_apk():
-    print('Installing...')
-    print(adb('adb install -r '+apk_path))
-
+    print(adb('adb install -r '+apk_path()))
+    #print('Installing...')
+    
 def uninstall_apk(AppName='com.feiteng.lieyou'):
     print('Uninstalling...')
     print(adb('adb uninstall {}'.format(AppName)))  
