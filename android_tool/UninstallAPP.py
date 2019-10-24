@@ -1,5 +1,5 @@
 #import os
-#import sys
+import sys
 import android_adb_tool as adb
 """
 可通过运行带参数卸载指定apk
