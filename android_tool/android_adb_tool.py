@@ -1,7 +1,8 @@
 ﻿#! /usr/bin/env python
 import os
 import re
-import subprocess
+#import subprocess
+from time import localtime, strftime
 
 '''
 os.system('adb devices') #os.system是不支持读取操作的
@@ -65,14 +66,15 @@ def screencap(file_name='screen'):
 
 def screen_record(time='10'):
     print('screen recording...')
-    adb('adb shell screenrecord --time-limit {} /sdcard/demo.mp4'.format(time))
+    file_name = strftime('%Y%m%d%H%M%S',localtime())
+    adb('adb shell screenrecord --time-limit {} /sdcard/{}.mp4'.format(time,file_name))
     """
     --time-limit 时长参数，默认180s，自定义10s: --time-limit 10
     --size       分辨率参数，默认屏幕尺寸，自定义: --size 1280*720
     --bit-rate   比特率参数，默认4Mbps,自定义6Mbps: --bit-rate 6000000 
     """
-    adb('adb pull /sdcard/demo.mp4 C:\\Users\\Administrator\\Desktop')
-    adb('adb shell rm /sdcard/demo.mp4')
+    adb('adb pull /sdcard/{}.mp4 C:\\Users\\Administrator\\Desktop'.format(file_name))
+    adb('adb shell rm /sdcard/{}.mp4'.format(file_name))
        
 def clear_app_cache(AppName='com.feiteng.lieyou'):
     adb('adb shell pm clear {}'.format(AppName))
