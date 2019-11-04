@@ -10,7 +10,7 @@ class InterfaceTool:
         
     def get_url(self,url):
         headers={'User-Agent':'Mozilla/5.0(iPhone;CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1'}
-        r = requests.get(url=url,headers=headers,timeout=15)
+        r = requests.get(url=url,headers=headers,timeout=30)
         if r.status_code != 200:
             raise Exception('network error:{}'.format(r.status_code))
         return json.loads(r.content)
@@ -86,4 +86,5 @@ if __name__=='__main__':
         #os.system('exit')
     except Exception as e:
         print(e)
+        input('Enter Pass')
     
