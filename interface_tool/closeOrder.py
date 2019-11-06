@@ -11,28 +11,26 @@ def get_url(url):
 
 def read_file():
     with open('1.txt') as f:
-        temp = []
-        id = f.readlines()
-        for id in id:
-            temp.append(id.strip('\n'))
         orderId = []
-        for temp in temp:
-            if temp != '':
-                orderId.append(temp.strip())
+        line = f.readlines()
+        for line in line:
+            temp_id = line.strip()
+            if temp_id != '' and temp_id.isdigit() and len(temp_id)==7:
+                orderId.append(temp_id)
     return orderId
 
 def run():
     orderId = read_file()
     for orderId in orderId:
-        url = 
+        url = 'http://api.lieyou.com/api/order/testCloseOrder?orderId={}&cache=no'.format(orderId)
         result = get_url(url)
         print('orderId:{} result:{}'.format(orderId,result['msg']))
 
 
 if __name__=='__main__':
     try:
-        a = read_file()
-        print(a)
+        #a = read_file()
+        run()
     except Exception as e:
         print(e)
         input('Enter Pass')
