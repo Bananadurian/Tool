@@ -31,6 +31,7 @@ if __name__=='__main__':
     try:
         #a = read_file()
         run()
+        input('Enter Pass')
     except Exception as e:
         print(e)
         input('Enter Pass')
