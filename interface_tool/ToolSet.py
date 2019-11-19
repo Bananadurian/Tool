@@ -26,6 +26,9 @@ class Tool:
         return data
 
     def close_order(self):
+        """
+        需要关闭的订单ID存放在1.txt
+        """
         line = self.read_file()
         orderId = []
         for line in line:
@@ -38,6 +41,9 @@ class Tool:
             print('orderId:{} {}'.format(orderId,result['msg']))
 
     def im_send_gift(self,login_bid):
+        """
+        IM发送礼物，login_bid=送礼bid,被送礼bid则从文件1.txt读取
+        """
         session = self.login(login_bid)
         line = self.read_file()
         toBid = []
@@ -52,25 +58,25 @@ class Tool:
                 raise Exception('Network Error:{}'.format(r.status_code))
             print('toBid:{} code:{}'.format(toBid,json.loads(r.content)['code']))
 
-    def room_send_gift(self,login_bid):
+    def room_send_gift(self):
+        """
+        语音房间送礼,送礼bid固定，被送礼bid=10000248288，房间11513，礼物=甜心，数量=10
+        """
+        bid = ['10000200342','10000248282','10000247871']
+        login_bid=bid[0]
         session = self.login(login_bid)
-        line = self.read_file()
-        toBid = []
-        for line in line:
-            temp_toBid = line.strip()
-            if temp_toBid != '' and temp_toBid.isdigit() and len(temp_toBid) == 11:
-                toBid.append(temp_toBid)
-        for toBid in toBid:
-            url = 'http://api.lieyou.com/api/voice_room/send_gift?os=1&appName=lieyou&appver=3.2.0&giftType=1&signStr=7d2f29a6f1e675d01574168333&roomId=11513&versionCode=85&giftId=51&appLoginBid=10000200342&packageChannel=offical&toBid=%5B%2210000248288%22%5D&giftNum=10&sendType=2&time=1574168333'
-            r = session.get(url=url,timeout = 60)
-            if r.status_code != 200:
-                raise Exception('Network Error:{}'.format(r.status_code))
-            print('toBid:{} code:{}'.format(toBid,json.loads(r.content)['code']))
+        url = 'http://api.lieyou.com/api/voice_room/send_gift?os=1&appName=lieyou&appver=3.2.0&giftType=1&signStr=7d2f29a6f1e675d01574168333&roomId=11513&versionCode=85&giftId=51&appLoginBid=10000200342&packageChannel=offical&toBid=%5B%2210000248288%22%5D&giftNum=10&sendType=2&time=1574168333'
+        r = session.get(url=url,timeout = 60)
+        if r.status_code != 200:
+            raise Exception('Network Error:{}'.format(r.status_code))
+        print('bid={} toBid=10000248288 {}'.format(login_bid,json.loads(r.content)['msg']))
 
 if __name__=='__main__':
     tool = Tool()
     try:
-        tool.im_send_gift(10000248288)
+        #tool.close_order()
+        #tool.im_send_gift(10000248288)
+        tool.room_send_gift()
         input('Enter Pass')
     except Exception as e:
         print(e)
