@@ -69,7 +69,7 @@ class Tool:
         r = session.get(url=url,timeout = 60)
         if r.status_code != 200:
             raise Exception('Network Error:{}'.format(r.status_code))
-        print('bid={} toBid=10000248288 {}'.format(login_bid,json.loads(r.content)['msg']))
+        print('bid={} toBid=10000248288 {} starValue=2000'.format(login_bid,json.loads(r.content)['msg']))
 
 if __name__=='__main__':
     tool = Tool()

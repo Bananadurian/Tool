@@ -12,7 +12,7 @@ class Tool:
         r = session.get(url = 'http://api.lieyou.com/base/api/test_login?bid={}'.format(login_bid),headers = self.headers,timeout = 60 )
         if r.status_code != 200:
             raise Exception('Network Error:'.format(r.status_code))
-        print(json.loads(r.content)['msg'])
+        print('{}{}'.format(login_bid,json.loads(r.content)['msg']))
         return session
 
     def get_url(self,url):
@@ -53,13 +53,15 @@ class Tool:
             if temp_toBid != '' and temp_toBid.isdigit() and len(temp_toBid) == 11:
                 toBid.append(temp_toBid)
         for toBid in toBid:
+            giftId = 51     # 甜心10猎游币
             #giftNum=1
             giftNum = random.randint(1,10)
-            url = 'http://api.lieyou.com/api/gift/send?os=1&appName=lieyou&appver=3.2.0&giftType=1&roomId=0&versionCode=85&scene=1&giftId=51&appLoginBid={}&packageChannel=offical&toBid={}&giftNum={}'.format(login_bid,toBid,giftNum)
+            starValue = giftNum*200
+            url = 'http://api.lieyou.com/api/gift/send?os=1&appName=lieyou&appver=3.2.0&giftType=1&roomId=0&versionCode=85&scene=1&giftId={}&appLoginBid={}&packageChannel=offical&toBid={}&giftNum={}'.format(giftId,login_bid,toBid,giftNum)
             r = session.get(url=url,timeout = 60)
             if r.status_code != 200:
                 raise Exception('Network Error:{}'.format(r.status_code))
-            print('bid={} toBid={} code:{} giftNum={}'.format(login_bid,toBid,json.loads(r.content)['code'],giftNum))
+            print('bid={} toBid={} code:{} giftNum={} starValue={}'.format(login_bid,toBid,json.loads(r.content)['code'],giftNum,starValue))
 
     def room_send_gift(self):
         """
@@ -80,7 +82,7 @@ if __name__=='__main__':
         #tool.close_order()
         tool.im_send_gift(10000248288)
         #tool.room_send_gift()
-        input('Enter Pass')
+        #input('Enter Pass')
     except Exception as e:
         print(e)
         input('Enter Pass')
