@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 import requests
 import json
-import random
 
 class Tool:
     def __init__(self):
@@ -53,13 +52,11 @@ class Tool:
             if temp_toBid != '' and temp_toBid.isdigit() and len(temp_toBid) == 11:
                 toBid.append(temp_toBid)
         for toBid in toBid:
-            #giftNum=1
-            giftNum = random.randint(1,10)
-            url = 'http://api.lieyou.com/api/gift/send?os=1&appName=lieyou&appver=3.2.0&giftType=1&roomId=0&versionCode=85&scene=1&giftId=51&appLoginBid={}&packageChannel=offical&toBid={}&giftNum={}'.format(login_bid,toBid,giftNum)
+            url = 'http://api.lieyou.com/api/gift/send?os=1&appName=lieyou&appver=3.2.0&giftType=1&roomId=0&versionCode=85&scene=1&giftId=51&appLoginBid={}&packageChannel=offical&toBid={}&giftNum=300'.format(login_bid,toBid)
             r = session.get(url=url,timeout = 60)
             if r.status_code != 200:
                 raise Exception('Network Error:{}'.format(r.status_code))
-            print('bid={} toBid={} code:{} giftNum={}'.format(login_bid,toBid,json.loads(r.content)['code'],giftNum))
+            print('toBid:{} code:{}'.format(toBid,json.loads(r.content)['code']))
 
     def room_send_gift(self):
         """
@@ -78,8 +75,8 @@ if __name__=='__main__':
     tool = Tool()
     try:
         #tool.close_order()
-        tool.im_send_gift(10000248288)
-        #tool.room_send_gift()
+        #tool.im_send_gift(10000248288)
+        tool.room_send_gift()
         input('Enter Pass')
     except Exception as e:
         print(e)
