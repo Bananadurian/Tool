@@ -62,6 +62,7 @@ def screencap(file_name='screen'):
     print('is talking a screenshot...')
     adb('adb shell screencap -p /sdcard/{}.png'.format(file_name))
     adb('adb pull /sdcard/{}.png C:\\Users\\Administrator\\Desktop'.format(file_name))
+    #adb('adb pull /sdcard/{}.png C:\\Users\\Administrator\\Desktop\\xuanfutiao'.format(file_name))
     adb('adb shell rm /sdcard/{}.png'.format(file_name))
 
 def screen_record(time='10'):

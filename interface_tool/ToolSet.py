@@ -56,13 +56,13 @@ class Tool:
             giftType = 1
             if giftType == 1:
                 giftId = 51     # 甜心10猎游币
-                #giftNum=1
-                giftNum = random.randint(5000,6000)
+                giftNum=1    #1000是20W  5000是100W
+                #giftNum = random.randint(5000,6000)
                 #giftNum = random.randint(1,10)
                 starValue = giftNum*200
             if giftType == 2:
                 giftId = 105
-                giftNum = 1
+                giftNum = 21
                 #giftNum = random.randint(1,10)
                 starValue = giftNum*1000
             url = 'http://api.lieyou.com/api/gift/send?os=1&appName=lieyou&appver=3.2.0&giftType={}&roomId=0&versionCode=85&scene=1&giftId={}&appLoginBid={}&packageChannel=offical&toBid={}&giftNum={}'.format(giftType,giftId,login_bid,toBid,giftNum)
