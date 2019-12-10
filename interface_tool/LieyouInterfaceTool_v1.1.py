@@ -19,14 +19,14 @@ class InterfaceTool:
         '''设置密码'''
         flag = True
         while flag:
-            result = self.get_url('http://passport.lieyou.com/lieyou/sdk/create_password?cache=no&bid={}&isNew=1&password={}'.format(self.bid,self.password))
+            result = self.get_url('http://api.lieyou.com/lieyou/sdk/create_password?cache=no&bid={}&isNew=1&password={}'.format(self.bid,self.password))
             if result['code'] == 0:
                 flag = False
         print(result['msg']+'\n')
         
     def relieve_bind_device(self):
         '''清除绑定设备'''
-        result = self.get_url('http://passport.lieyou.com/goplay/api/relieve_bind_device?name=ccy123&bid={}&cache=no&clearMobile=1&type=byLoginBid'.format(self.bid))
+        result = self.get_url('http://api.lieyou.com/goplay/api/relieve_bind_device?name=ccy123&bid={}&cache=no&clearMobile=1&type=byLoginBid'.format(self.bid))
         print(result['msg']+'\n')
         
     def modify_account_type(self):
@@ -43,7 +43,7 @@ class InterfaceTool:
         '''
         解除72小时绑定限制
         '''
-        result = self.get_url('http://passport.lieyou.com/goplay/api/relieve_bind_mobile_limit?bid={}'.format(self.bid))
+        result = self.get_url('http://api.lieyou.com/goplay/api/relieve_bind_mobile_limit?bid={}'.format(self.bid))
         print(result['msg']+'\n')
 
 def enter_command():
