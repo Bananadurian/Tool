@@ -21,42 +21,9 @@ class Tool:
         return json.loads(r.content)
     
     def read_file(self):
-        with open('1.txt') as f:
+        with open('data.txt') as f:
             data = f.readlines()
         return data
-
-    def close_order(self):
-        """
-        需要关闭的订单ID存放在1.txt
-        """
-        line = self.read_file()
-        orderId = []
-        for line in line:
-            temp_id = line.strip()
-            if temp_id != '' and temp_id.isdigit() and len(temp_id) == 7:
-                orderId.append(temp_id)
-        for orderId in orderId:
-            url = 'http://api.lieyou.com/api/order/testCloseOrder?orderId={}&cache=no'.format(orderId)
-            result = self.get_url(url)
-            print('orderId:{} {}'.format(orderId,result['msg']))
-
-    def im_send_gift(self,login_bid):
-        """
-        IM发送礼物，login_bid=送礼bid,被送礼bid则从文件1.txt读取
-        """
-        session = self.login(login_bid)
-        line = self.read_file()
-        toBid = []
-        for line in line:
-            temp_toBid = line.strip()
-            if temp_toBid != '' and temp_toBid.isdigit() and len(temp_toBid) == 11:
-                toBid.append(temp_toBid)
-        for toBid in toBid:
-            url = 'http://api.lieyou.com/api/gift/send?os=1&appName=lieyou&appver=3.2.0&giftType=1&roomId=0&versionCode=85&scene=1&giftId=51&appLoginBid={}&packageChannel=offical&toBid={}&giftNum=300'.format(login_bid,toBid)
-            r = session.get(url=url,timeout = 60)
-            if r.status_code != 200:
-                raise Exception('Network Error:{}'.format(r.status_code))
-            print('toBid:{} code:{}'.format(toBid,json.loads(r.content)['code']))
 
     def room_send_gift(self):
         """
@@ -74,8 +41,6 @@ class Tool:
 if __name__=='__main__':
     tool = Tool()
     try:
-        #tool.close_order()
-        #tool.im_send_gift(10000248288)
         tool.room_send_gift()
         input('Enter Pass')
     except Exception as e:

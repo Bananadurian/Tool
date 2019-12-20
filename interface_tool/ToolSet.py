@@ -22,13 +22,13 @@ class Tool:
         return json.loads(r.content)
     
     def read_file(self):
-        with open('1.txt') as f:
+        with open('data.txt') as f:
             data = f.readlines()
         return data
 
     def close_order(self):
         """
-        需要关闭的订单ID存放在1.txt
+        需要关闭的订单ID存放在data.txt
         """
         line = self.read_file()
         orderId = []
@@ -43,7 +43,7 @@ class Tool:
 
     def im_send_gift(self,login_bid):
         """
-        IM发送礼物，login_bid=送礼bid,被送礼bid则从文件1.txt读取
+        IM发送礼物，login_bid=送礼bid,被送礼bid则从文件data.txt读取
         """
         session = self.login(login_bid)
         line = self.read_file()

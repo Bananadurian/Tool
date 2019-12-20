@@ -10,26 +10,25 @@ def get_url(url):
     return json.loads(r.content)
 
 def read_file():
-    with open('1.txt') as f:
-        orderId = []
+    with open('data.txt') as f:
+        bid = []
         line = f.readlines()
         for line in line:
             temp_id = line.strip()
             if temp_id != '' and temp_id.isdigit() and len(temp_id)==11:
-                orderId.append(temp_id)
-    return orderId
+                bid.append(temp_id)
+    return bid
 
 def run():
-    orderId = read_file()
-    for orderId in orderId:
-        url = 'http://passport.lieyou.com/lieyou/sdk/create_password?cache=no&bid={}&isNew=1&password=asd123'.format(orderId)
+    bid = read_file()
+    for bid in bid:
+        url = 'http://passport.lieyou.com/lieyou/sdk/create_password?cache=no&bid={}&isNew=1&password=asd123'.format(bid)
         result = get_url(url)
-        print('bid:{} result:{}'.format(orderId,result['msg']))
+        print('bid:{} result:{}'.format(bid,result['msg']))
 
 
 if __name__=='__main__':
     try:
-        #a = read_file()
         run()
         input('Enter Pass')
     except Exception as e:

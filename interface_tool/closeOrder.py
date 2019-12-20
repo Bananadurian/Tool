@@ -10,7 +10,7 @@ def get_url(url):
     return json.loads(r.content)
 
 def read_file():
-    with open('1.txt') as f:
+    with open('data.txt') as f:
         orderId = []
         line = f.readlines()
         for line in line:
@@ -29,7 +29,6 @@ def run():
 
 if __name__=='__main__':
     try:
-        #a = read_file()
         run()
         input('Enter Pass')
     except Exception as e:
