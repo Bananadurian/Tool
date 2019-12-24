@@ -1,9 +1,10 @@
+#! /usr/bin/env python 
 import requests
 import json
 from time import localtime,strftime,sleep
 
 def login(bid):
-    seesion = requests.session()
+    session = requests.session()
     headers = {'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML,like Gecko)Version/10.0 Mobile/14E304 Safari/602.1'}
     url = 'http://api.lieyou.com/base/api/test_login?bid={}'.format(bid)
     res = session.get(url = url,headers = headers)
@@ -26,34 +27,53 @@ def get_url(url):
         raise Exception('Network Error')
     return json.loads(res.content)
     
-def main(pageNum):
-    queueMark = 0   
+def session_get_url(session,url):
+    res = session.get(url)
+    if res.status_code != 200:
+        raise Exception('Network Error')
+    return json.loads(res.content)
+
+def main(pageNum,login_bid):
+    queueMark = 0
+    session = login(login_bid)
     for page in range(1,pageNum+1):
-        url = 'http://api.lieyou.com/api/blog/hotspot_category_recommendation_list?\
-               lng=113.371506&os=1&appName=lieyou&appver=3.0.0&socialityTags=0&versionCode=78&appLoginBid=10000248288&packageChannel=offical&lat=23.123453\
-               &page={}&categoryId=23&queueMark={}'.format(page,queueMark)
-        #print(page,queueMark)
-        res = get_url(url)
+        #游记热门标签url,可以修改分类id获取不同的分类
+        hot_category_url = 'http://api.lieyou.com/api/blog/hotspot_category_recommendation_list?os=1&socialityTags=0&versionCode=91\
+        &appLoginBid={}&page={}&queueMark={}&categoryId=25'.format(login_bid,page,queueMark)
+        #话题热门，可修改话题ID
+        hot_topic_url = 'http://api.lieyou.com/api/topic/get_topic_blog_list?versionCode=91&os=1&topicType=0&pageSize=20\
+        &appLoginBid={}&page={}&queueMark={}&topicId=72'.format(login_bid,page,queueMark)
+        #猎人秀，可修改游戏ID
+        lierenxiu_url = 'http://api.lieyou.com/api/blog/hotspot_category_recommendation_list?versionCode=91&os=1&socialityTags=0&categoryId=38\
+        &appLoginBid={}&page={}&queueMark={}&gameId=1'.format(login_bid,page,queueMark)
+        
+        #res = get_url(url)
+        res = session_get_url(session,hot_category_url)
+        #res = session_get_url(session,hot_topic_url)
+        #res = session_get_url(session,lierenxiu_url)
+
         queueMark = res['data']['queueMark']
         try:
             for i in range(len(res['data']['blogList'])):
                 nickname = res['data']['blogList'][i]['user']['nickname']
-                ishunter = res['data']['blogList'][i]['user']['isHunter']
+                #ishunter = res['data']['blogList'][i]['user']['isHunter']
                 bid = res['data']['blogList'][i]['user']['bid']
                 did = res['data']['blogList'][i]['blog']['did']
+                createtime =strftime('%Y-%m-%d %H:%M:%S',localtime(res['data']['blogList'][i]['blog']['createTime']))
                 #assert ishunter == 0,'存在猎人'
-                temp = 'page={:>2} id={:>2}, ishunter={}, {:10d} {:12d}, {}'.format(page,i,ishunter,did,bid,nickname)
-                print(temp)
+                temp = 'page={:<3}id={:<3}{:^11d}{:^14d}{:^22s}{}'.format(page,i,did,bid,createtime,nickname)
+                #print(temp)
                 f.write(temp+'\n')
         except Exception: pass
         sleep(1)
+        
 if __name__=='__main__':
     try:
-        f = open('{}.txt'.format(strftime('%y%m%d%H%M%S',localtime())),'a',encoding='utf-8')
-        date = strftime('%y%m%d%H%M%S',localtime())
+        f = open('{}.txt'.format(strftime('%Y%m%d%H%M%S',localtime())),'a',encoding='utf-8')
+        date = strftime('%Y%m%d%H%M%S',localtime())
         print(date)
-        main(5)
+        main(20,10000248282)
     except Exception as e:
         print(e)
     finally:
-            f.close()
+        f.close()
