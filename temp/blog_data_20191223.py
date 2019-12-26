@@ -39,7 +39,7 @@ def main(pageNum,login_bid):
     for page in range(1,pageNum+1):
         #游记热门标签url,可以修改分类id获取不同的分类
         hot_category_url = 'http://api.lieyou.com/api/blog/hotspot_category_recommendation_list?os=1&socialityTags=0&versionCode=91\
-        &appLoginBid={}&page={}&queueMark={}&categoryId=25'.format(login_bid,page,queueMark)
+        &appLoginBid={}&page={}&queueMark={}&categoryId=30'.format(login_bid,page,queueMark)
         #话题热门，可修改话题ID
         hot_topic_url = 'http://api.lieyou.com/api/topic/get_topic_blog_list?versionCode=91&os=1&topicType=0&pageSize=20\
         &appLoginBid={}&page={}&queueMark={}&topicId=72'.format(login_bid,page,queueMark)
@@ -72,7 +72,7 @@ if __name__=='__main__':
         f = open('{}.txt'.format(strftime('%Y%m%d%H%M%S',localtime())),'a',encoding='utf-8')
         date = strftime('%Y%m%d%H%M%S',localtime())
         print(date)
-        main(20,10000248282)
+        main(10,10017370853)
     except Exception as e:
         print(e)
     finally:
