@@ -1,5 +1,6 @@
+#! /usr/bin/env python
 import sys
-from android_adb_tool import get_device_state, uninstall_apk
+from utils import get_device_state,uninstall_apk
 
 """
 可通过运行带参数卸载指定apk

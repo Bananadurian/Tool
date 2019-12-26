@@ -1,6 +1,6 @@
 #! /usr/bin/env python
-from android_adb_tool import get_device_state
-from android_adb_tool import screen_record
+from utils import get_device_state
+from utils import screen_record
 
 get_device_state()
 time = ''
