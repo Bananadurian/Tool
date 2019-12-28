@@ -9,9 +9,10 @@ import os
 # os.path.join 拼接文件路径
 # os.path.isfile 判断是否是文件
 # os.path.isdir 判断是否是路径
+# os.path.splitext()  将路径拆分为文件名+扩展名
 
 # os.walk 模块
-file_path = r'C:\Users\jinfengqin\Downloads\InstallApp'
+file_path = r'C:\Users\Administrator\Downloads'
 def oswalk(path):
     for root,dirs,files in os.walk(file_path):
         print('root:',root)  # 获取当前目录路径
@@ -22,10 +23,11 @@ def oswalk(path):
 def listdir(path):
     file_time = 0
     for files in os.listdir(path):
-        print(files)
+        #print(files)
         #print(type(files))
         file_path = os.path.join(path,files)  # os.path.join 拼接文件路径
-        if os.path.isfile(file_path):  # os.path.isfile 判断是否是文件
+        #print('caifen:',os.path.splitext(file_path))
+        if os.path.isfile(file_path) and os.path.splitext(file_path)[1] == '.apk':  # os.path.isfile 判断是否是文件 os.path.splitext 判断是否是apk安装包
             print('file_path:',file_path)
             print(os.path.getmtime(file_path))
             file_time_temp = os.path.getmtime(file_path)
