@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 import os
+import re
 from utils import get_device_state, install_apk
 
 def get_apk_path():
@@ -20,6 +21,5 @@ def get_apk_path():
 
 if __name__=='__main__':
     get_device_state()     
-    install_apk(get_apk_path())
-    #get_apk_path()
+    install_apk(get_apk_path())    
     input('Enter Pass')
