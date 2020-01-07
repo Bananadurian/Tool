@@ -2,6 +2,7 @@
 import os
 import re
 from utils import get_device_state, install_apk
+from time import sleep
 
 def get_apk_path():
     '''
@@ -21,5 +22,12 @@ def get_apk_path():
 
 if __name__=='__main__':
     get_device_state()     
-    install_apk(get_apk_path())    
-    input('Enter Pass')
+    result = install_apk(get_apk_path())    
+    if re.search('success',result):
+        for i in range(5,0,-1)
+            print(' {}s后自动退出'.format(i), end = '')
+            print('\b'*16, end = '', flush = True)
+            sleep(1)
+        # 可使用 os._exit() sys.exit() 退出
+    else:
+        input('Enter Pass')
