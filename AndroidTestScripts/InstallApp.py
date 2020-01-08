@@ -23,8 +23,8 @@ def get_apk_path():
 if __name__=='__main__':
     get_device_state()     
     result = install_apk(get_apk_path())    
-    if re.search('success',result):
-        for i in range(5,0,-1)
+    if re.search('Success',result):
+        for i in range(5,0,-1):
             print(' {}s后自动退出'.format(i), end = '')
             print('\b'*16, end = '', flush = True)
             sleep(1)
