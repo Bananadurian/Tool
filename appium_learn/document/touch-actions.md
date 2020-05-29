@@ -23,7 +23,7 @@
 - 短按(press)
 - 释放(release)
 - 移动到(moveTo)
-- 点击(tap)
+- 点击(tap) 
 - 等待(wait)
 - 长按(longPress)
 - 取消(cancel)
