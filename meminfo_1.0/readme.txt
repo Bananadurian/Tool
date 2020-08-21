@@ -1,8 +1,12 @@
 1.执行“数据采集.bat”采集数据，需要输入包名
 2.执行“生成excel报告.bat”
 
+
+
 依赖库：openpyxl
 
+采集数据命令：
+adb shell ps | findstr 包名
 
 其它：
 查看设备安装的所有APP包名：
