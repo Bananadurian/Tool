@@ -1,5 +1,0 @@
->>> import sys, pytest
->>> if sys.platform.startswith('win'):
-...     pytest.skip('this doctest does not work on Windows')
->>> function()
-42
